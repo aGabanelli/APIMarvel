@@ -1,0 +1,40 @@
+﻿@page
+@model CharacterModel
+@{
+    ViewData["Title"] = "Personagens da Revista";
+}
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.Characters != null && Model.Characters.Any())
+{
+    @* Exibição dos personagens em uma espécie de galeria, exibindo seu nome, descrição e foto *@
+    <div class="album py-5">
+        <div class="container">
+            <div class="row">
+                @foreach (var character in Model.Characters)
+                {
+
+                    <div class="col-md-4">
+                        <div class="mb-4 shadow-sm">
+                            <img class="card-img-top" src="@Url.Content(character.Thumbnail.Path + "." + character.Thumbnail.Extension)" alt="Imagem do Personagem" />
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <p class="fw-bold">
+                                        @character.Name
+                                    </p>
+                                    <p>
+                                        @character.Description
+                                    </p>
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            </div>
+        </div>        
+
+
+
+}

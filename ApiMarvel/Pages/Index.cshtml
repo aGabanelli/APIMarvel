@@ -1,0 +1,39 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Buscar Personagens por quadrinho</h1>
+
+    @*Capturar o nome da revista e buscar na API*@    
+    <div class="container mt-5 mb-4 w-50">
+        <form method ="get" asp-page-handler="Search">
+            <div class="row d-flex">
+                <div class="col">
+                    <input type="type" id="searchInput" name="searchInput" class="border-danger rounded btn text-start w-100" placeholder="Busque por títulos"/>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-danger">Pesquisar</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    @*Verifica primeiro se existem elementos na lista *@
+    @if (Model.Comics != null && Model.Comics.Any())
+    {
+        <ul>
+            @*É exibido todos os resultados buscados dentro de uma lista, buscado por um foreach *@
+            @foreach (var comic in Model.Comics)
+            {
+                <li class="d-flex align-content-start text-info lead fw-bold pb-2">
+                    <a class="text-black-50" asp-page="/Character" asp-route-comicId="@comic.Id">@comic.Title</a>
+                </li>
+            }
+        </ul>
+    }
+
+</div>
